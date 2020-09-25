@@ -23,7 +23,7 @@ import br.com.fns.centralatendimento.service.EnderecoService;
 @RequestMapping("/api/endereco")
 public class EnderecoController {
 
-	@RequestMapping(value = "endereco/{cep}", method = RequestMethod.GET, produces = { "application/json" })
+	@RequestMapping(value = "{cep}", method = RequestMethod.GET, produces = { "application/json" })
 	public Endereco getEnderecoPorCep(@PathVariable("cep") String cep, Model model) {
 		try {
 

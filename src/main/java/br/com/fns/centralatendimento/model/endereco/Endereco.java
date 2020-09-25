@@ -1,5 +1,8 @@
 package br.com.fns.centralatendimento.model.endereco;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Endereco {
 	String cep;
 	String logradouro;
@@ -7,6 +10,7 @@ public class Endereco {
 	String bairro;
 	String localidade;
 	String uf;
+	String numero;
 
 	public String getCep() {
 		return cep;
@@ -54,6 +58,14 @@ public class Endereco {
 
 	public void setUf(String uf) {
 		this.uf = uf;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 
 	@Override

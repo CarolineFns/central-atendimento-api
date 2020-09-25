@@ -16,18 +16,17 @@ import br.com.fns.centralatendimento.repository.ClienteRepository;
 import br.com.fns.centralatendimento.service.EnderecoService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/clientes")
 public class ClienteController {
 
 	@Autowired
 	private ClienteRepository repository;
 
-	@RequestMapping("/")
 	public String index() {
 		return "index";
 	}
 
-	@RequestMapping(value = "/listaclientes", method = RequestMethod.GET, produces = { "application/json" })
+	@RequestMapping(value = "", method = RequestMethod.GET, produces = { "application/json" })
 	public Iterable<Cliente> listaClientes(Model model) {
 
 		Iterable<Cliente> clientes = repository.findAll();
@@ -35,7 +34,7 @@ public class ClienteController {
 		return clientes;
 	}
 
-	@RequestMapping(value = "/listaclientes/{cpf}", method = RequestMethod.GET, produces = { "application/json" })
+	@RequestMapping(value = "/{cpf}", method = RequestMethod.GET, produces = { "application/json" })
 	public Cliente cliente(@PathVariable("cpf") String cpf) {
 
 		List<Cliente> cliente = repository.findByCpf(cpf);
@@ -46,8 +45,7 @@ public class ClienteController {
 		return new Cliente();
 	}
 
-	@RequestMapping(value = "/listaclientes/{cpf}/endereco", method = RequestMethod.GET, produces = {
-			"application/json" })
+	@RequestMapping(value = "/{cpf}/endereco", method = RequestMethod.GET, produces = { "application/json" })
 	public Endereco getEnderecoClientePorCep(@PathVariable("cpf") String cpf) {
 		try {
 
@@ -70,6 +68,9 @@ public class ClienteController {
 		if (repository.findById(id).isPresent()) {
 			Cliente clienteExistente = repository.findById(id).get();
 			clienteExistente.setCep(cliente.getCep());
+			clienteExistente.setEstado(cliente.getEstado());
+			clienteExistente.setLogradouro(cliente.getLogradouro());
+			clienteExistente.setMunicipio(cliente.getMunicipio());
 
 			repository.save(clienteExistente);
 
