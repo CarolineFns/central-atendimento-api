@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import br.com.fns.centralatendimento.model.Cliente;
+import br.com.fns.centralatendimento.model.cliente.Cliente;
 
 public interface ClienteRepository extends CrudRepository<Cliente, Long> {
 

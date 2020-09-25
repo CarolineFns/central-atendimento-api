@@ -1,4 +1,4 @@
-package br.com.fns.centralatendimento.model;
+package br.com.fns.centralatendimento.model.cliente;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

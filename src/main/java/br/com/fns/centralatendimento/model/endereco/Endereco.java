@@ -1,4 +1,4 @@
-package br.com.fns.centralatendimento.model;
+package br.com.fns.centralatendimento.model.endereco;
 
 public class Endereco {
 	String cep;

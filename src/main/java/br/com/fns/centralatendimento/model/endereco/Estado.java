@@ -1,4 +1,4 @@
-package br.com.fns.centralatendimento.model;
+package br.com.fns.centralatendimento.model.endereco;
 
 public class Estado implements Comparable<Estado> {
 	private Long id;

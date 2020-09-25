@@ -10,9 +10,9 @@ import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
-import br.com.fns.centralatendimento.model.Endereco;
-import br.com.fns.centralatendimento.model.Estado;
-import br.com.fns.centralatendimento.model.Municipio;
+import br.com.fns.centralatendimento.model.endereco.Endereco;
+import br.com.fns.centralatendimento.model.endereco.Estado;
+import br.com.fns.centralatendimento.model.endereco.Municipio;
 import br.com.fns.centralatendimento.utils.Utils;
 
 public class EnderecoService {
