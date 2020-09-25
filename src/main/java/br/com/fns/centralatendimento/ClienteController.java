@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fns.centralatendimento.model.cliente.Cliente;
@@ -36,7 +36,7 @@ public class ClienteController {
 	}
 
 	@RequestMapping(value = "/listaclientes/{cpf}", method = RequestMethod.GET, produces = { "application/json" })
-	public Cliente cliente(@PathVariable("cpf") String cpf, Model model) {
+	public Cliente cliente(@PathVariable("cpf") String cpf) {
 
 		List<Cliente> cliente = repository.findByCpf(cpf);
 
@@ -48,7 +48,7 @@ public class ClienteController {
 
 	@RequestMapping(value = "/listaclientes/{cpf}/endereco", method = RequestMethod.GET, produces = {
 			"application/json" })
-	public Endereco getEnderecoClientePorCep(@PathVariable("cpf") String cpf, Model model) {
+	public Endereco getEnderecoClientePorCep(@PathVariable("cpf") String cpf) {
 		try {
 
 			List<Cliente> clientes = repository.findByCpf(cpf);
@@ -64,19 +64,19 @@ public class ClienteController {
 		return new Endereco();
 	}
 
-	@RequestMapping(value = "alterar", method = RequestMethod.POST)
-	public String alterar(@RequestParam("nome") String nome, @RequestParam("email") String email,
-			@RequestParam("telefone") String telefone, @RequestParam("cpf") String cpf, Model model) {
+	@RequestMapping(value = "/alterar/{id}", method = RequestMethod.POST)
+	public Cliente alterar(@PathVariable(value = "id") Long id, @RequestBody Cliente cliente) {
 
-		Cliente novoCliente = new Cliente(nome, email, telefone, cpf);
+		if (repository.findById(id).isPresent()) {
+			Cliente clienteExistente = repository.findById(id).get();
+			clienteExistente.setCep(cliente.getCep());
 
-		repository.save(novoCliente);
+			repository.save(clienteExistente);
 
-		Iterable<Cliente> clientes = repository.findAll();
+			return clienteExistente;
+		}
 
-		model.addAttribute("clientes", clientes);
-
-		return "listaclientes";
+		return new Cliente();
 
 	}
 

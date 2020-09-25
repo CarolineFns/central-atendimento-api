@@ -25,6 +25,11 @@ public class Cliente {
 
 	}
 
+	public Cliente(Long id) {
+		super();
+		this.id = id;
+	}
+
 	public Cliente(String nome, String email, String telefone, String cpf) {
 		super();
 		this.nome = nome;
